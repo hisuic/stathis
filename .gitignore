@@ -2,7 +2,7 @@
 .env
 
 # codex
-.codex/
+.codex
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/rust,rust-analyzer
