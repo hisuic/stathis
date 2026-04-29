@@ -8,6 +8,9 @@ use serenity::prelude::*;
 
 struct Handler;
 
+// Load modules
+mod commands;
+
 #[async_trait]
 impl EventHandler for Handler {
     // Set a handler for the `message` event. This is called whenever a new message is received.
@@ -16,12 +19,9 @@ impl EventHandler for Handler {
     // dispatched simultaneously.
     async fn message(&self, ctx: Context, msg: Message) {
         if msg.content == "!ping" {
-            // Sending a message can fail, due to a network error, an authentication error, or lack
-            // of permissions to post in the channel, so log to stdout when some error happens,
-            // with a description of it.
-            if let Err(why) = msg.channel_id.say(&ctx.http, "Pong!").await {
-                println!("Error sending message: {why:?}");
-            }
+            commands::ping::run(&ctx, &msg).await;
+        } else if msg.content == "!remind" {
+            commands::remind::run(&ctx, &msg).await;
         }
     }
 
