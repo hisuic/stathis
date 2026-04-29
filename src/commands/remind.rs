@@ -27,6 +27,9 @@ pub async fn run(ctx: &Context, msg: &Message) {
         },
     };
 
+    // TODO: Get this reminder_text from user input
+    let mut reminder_text: String = String::from("sample text");
+
     let show_buttons = msg
         .channel_id
         .send_message(
@@ -74,4 +77,32 @@ pub async fn run(ctx: &Context, msg: &Message) {
                 return;
             }
         };
+
+        interaction
+            .create_response(
+                &ctx,
+            CreateInteractionResponse::UpdateMessage (
+                CreateInteractionResponseMessage::new()
+                    .content("Reminder set!")
+                    .components(vec![]),
+                ),
+            )
+            .await
+            .unwrap();
+
+        let ctx2 = ctx.clone();
+        let channel_id = msg.channel_id;
+        let user_id = msg.author.id;
+
+        tokio::spawn(async move {
+            tokio::time::sleep(delay).await;
+
+            channel_id
+                .say(
+                    &ctx2,
+                    format!("<@{}> reminder: {}", user_id, reminder_text),
+                )
+                .await
+                .unwrap();
+        });
 }
