@@ -7,3 +7,10 @@ edition = "2024"
 serenity = { version = "0.12", default-features = false, features = ["client", "gateway", "collector", "rustls_backend", "model"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 dotenvy = "0.15"
+
+[profile.release]
+opt-level = 'z'     # バイナリサイズを最小化（実行速度重視なら '3'）
+lto = true          # リンク時最適化で未使用コードを削除
+codegen-units = 1   # 最適化を最大化
+strip = true        # デバッグ記号を削除（バイナリが劇的に軽くなります）
+panic = 'abort'     # エラー時の後処理を簡略化して軽量化
