@@ -20,8 +20,9 @@ impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
         if msg.content == "!ping" {
             commands::ping::run(&ctx, &msg).await;
-        } else if msg.content == "!remind" {
-            commands::remind::run(&ctx, &msg).await;
+        } else if msg.content.starts_with("!remind") {
+            let reminder_text = msg.content.trim_start_matches("!remind").to_string();
+            commands::remind::run(&ctx, &msg, reminder_text).await;
         }
     }
 

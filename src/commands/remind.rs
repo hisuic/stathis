@@ -17,7 +17,7 @@ use serenity::builder::{
     CreateSelectMenuOption,
 };
 
-pub async fn run(ctx: &Context, msg: &Message) {
+pub async fn run(ctx: &Context, msg: &Message, reminder_text: String) {
     let channel = match msg.channel_id.to_channel(&ctx).await {
         Ok(channel) => channel,
         Err(why) => {
@@ -27,8 +27,11 @@ pub async fn run(ctx: &Context, msg: &Message) {
         },
     };
 
+    // Debug: to check if the message is correctly loaded
+    // println!("{}", reminder_text);
+
     // TODO: Get this reminder_text from user input
-    let mut reminder_text: String = String::from("sample text");
+    // let mut reminder_text: String = String::from("sample text");
 
     let show_buttons = msg
         .channel_id
