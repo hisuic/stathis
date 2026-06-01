@@ -30,6 +30,8 @@ pub async fn run(ctx: &Context, msg: &Message, reminder_text: String) {
     // Debug: to check if the message is correctly loaded
     // println!("{}", reminder_text);
 
+// TODO: 12時間までは1時間おきにボタンを追加してもいいかも
+
     let show_buttons = msg
         .channel_id
         .send_message(
