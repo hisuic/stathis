@@ -40,8 +40,14 @@ pub async fn run(ctx: &Context, msg: &Message, reminder_text: String) {
                 .content(format!("When should I remind you? \n\n"))
                 .button(CreateButton::new("remind_30_min").label("30 mins"))
                 .button(CreateButton::new("remind_1_h").label("1 hour"))
+                .button(CreateButton::new("remind_2_h").label("2 hour"))
                 .button(CreateButton::new("remind_3_h").label("3 hours"))
+                .button(CreateButton::new("remind_4_h").label("4 hours"))
                 .button(CreateButton::new("remind_5_h").label("5 hours"))
+                .button(CreateButton::new("remind_6_h").label("6 hours"))
+                .button(CreateButton::new("remind_8_h").label("8 hours"))
+                .button(CreateButton::new("remind_10_h").label("10 hours"))
+                .button(CreateButton::new("remind_12_h").label("12 hours"))
                 .button(CreateButton::new("remind_1_d").label("1 day"))
                 .button(CreateButton::new("remind_3_d").label("3 days"))
                 .button(CreateButton::new("remind_1_w").label("1 week"))
@@ -66,8 +72,14 @@ pub async fn run(ctx: &Context, msg: &Message, reminder_text: String) {
         let delay = match interaction.data.custom_id.as_str() {
             "remind_30_min" => Duration::from_secs(60 * 30),
             "remind_1_h" => Duration::from_secs(60 * 60),
+            "remind_2_h" => Duration::from_secs(60 * 60 * 2),
             "remind_3_h" => Duration::from_secs(60 * 60 * 3),
+            "remind_4_h" => Duration::from_secs(60 * 60 * 4),
             "remind_5_h" => Duration::from_secs(60 * 60 * 5),
+            "remind_6_h" => Duration::from_secs(60 * 60 * 6),
+            "remind_8_h" => Duration::from_secs(60 * 60 * 8),
+            "remind_10_h" => Duration::from_secs(60 * 60 * 10),
+            "remind_12_h" => Duration::from_secs(60 * 60 * 12),
             "remind_1_d" => Duration::from_secs(60 * 60 * 24),
             "remind_3_d" => Duration::from_secs(60 * 60 * 24 * 3),
             "remind_1_w" => Duration::from_secs(60 * 60 * 24 * 7),
